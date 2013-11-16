@@ -1,19 +1,8 @@
-/**
- * @fileoverview
- * Provides methods for the Hello Endpoints sample UI and interaction with the
- * Hello Endpoints API.
- */
-
-/** google global namespace for Google projects. */
 var wwg = wwg || {};
-
-/** devrel namespace for Google Developer Relations projects. */
 wwg.cardgames = wwg.cardgames || {};
 
 
 wwg.cardgames.init = function(apiRoot) {
-    // Loads the OAuth and helloworld APIs asynchronously, and triggers login
-    // when they have completed.
     var apisToLoad;
     var callback = function() {
         if (--apisToLoad == 0) {
