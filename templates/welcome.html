@@ -1,12 +1,15 @@
 {% extends 'base.html' %} {% block content %}
 
-<script src="/static/js/main.js" type="text/javascript"></script>
-<script src="https://apis.google.com/js/client.js?onload=init"></script>
-
 <div>
   <h2>Welcome to Card Games!</h2>
   <div id="content"></div>
 </div>
 
+{% endblock %}
+
+{% block externaljs %}
+
+<script type="text/javascript" src="/static/js/main.js"></script>
+<script type="text/javascript" src="https://apis.google.com/js/client.js?onload=init"></script>
 
 {% endblock %}

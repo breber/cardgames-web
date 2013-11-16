@@ -10,8 +10,7 @@ import logging
                hostname='worthwhile-games.appspot.com')
 class CardGamesApi(remote.Service):
 
-    @Game.query_method(user_required=True,
-                       path='game/list/all',
+    @Game.query_method(path='game/list/all',
                        name='game.list.all',)
     def GameListAll(self, query):
         return query.filter(Game.is_active == True)
