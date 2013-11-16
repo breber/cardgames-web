@@ -1,0 +1,9 @@
+# Python stuff
+.DS_Store
+*.pyc
+.pydevproject
+.project
+index.yaml
+CarHubApi.zip
+
+carhub-v1.discovery
