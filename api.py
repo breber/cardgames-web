@@ -11,8 +11,18 @@ import logging
 class CardGamesApi(remote.Service):
 
     @Game.query_method(path='game/list/all',
-                       name='game.list.all',)
+                       name='game.list.all')
     def GameListAll(self, query):
         return query.filter(Game.is_active == True)
+
+    @Game.method(path='game/add',
+                 http_method='POST',
+                 name='game.add')
+    def GameAdd(self, game):
+        # TODO: type
+        game.is_active = True
+        game.lastmodified = datetime.datetime.now()
+        game.put()
+        return game
 
 application = endpoints.api_server([CardGamesApi], restricted=False)
