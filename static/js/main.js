@@ -40,7 +40,7 @@ wwg.cardgames.listAllGames = function() {
             for (var i = 0; i < resp.items.length; i++) {
                 var item = resp.items[i];
                 var element = document.createElement('div');
-                element.innerHTML = item.server_id + " --> " + item.is_active + " (" + item.lastmodified + ")";
+                element.innerHTML = item.server_id + " --> " + " (" + item.lastmodified + ")";
                 document.getElementById('content').appendChild(element);
             }
         }
@@ -48,7 +48,8 @@ wwg.cardgames.listAllGames = function() {
 };
 
 function init() {
-    var ROOT = 'https://worthwhile-games.appspot.com/_ah/api';
+    // var ROOT = 'https://worthwhile-games.appspot.com/_ah/api';
+    var ROOT = window.location.protocol + '//' + window.location.host + '/_ah/api';
     wwg.cardgames.init(ROOT);
 }
 
