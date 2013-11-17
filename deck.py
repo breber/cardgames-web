@@ -1,0 +1,66 @@
+from card import *
+from constants import *
+
+class Deck():
+
+    @classmethod
+    def get_deck(cls, game_type):
+        deck = []
+
+        if game_type == GameType.TYPE_CRAZYEIGHTS:
+            deck.append(Card.create(Constants.SUIT_CLUBS, Constants.ACE_VALUE, 0))
+            deck.append(Card.create(Constants.SUIT_CLUBS, Constants.TWO_VALUE, 1))
+            deck.append(Card.create(Constants.SUIT_CLUBS, Constants.THREE_VALUE, 2))
+            deck.append(Card.create(Constants.SUIT_CLUBS, Constants.FOUR_VALUE, 3))
+            deck.append(Card.create(Constants.SUIT_CLUBS, Constants.FIVE_VALUE, 4))
+            deck.append(Card.create(Constants.SUIT_CLUBS, Constants.SIX_VALUE, 5))
+            deck.append(Card.create(Constants.SUIT_CLUBS, Constants.SEVEN_VALUE, 6))
+            deck.append(Card.create(Constants.SUIT_CLUBS, Constants.EIGHT_VALUE, 7))
+            deck.append(Card.create(Constants.SUIT_CLUBS, Constants.NINE_VALUE, 8))
+            deck.append(Card.create(Constants.SUIT_CLUBS, Constants.TEN_VALUE, 9))
+            deck.append(Card.create(Constants.SUIT_CLUBS, Constants.JACK_VALUE, 10))
+            deck.append(Card.create(Constants.SUIT_CLUBS, Constants.QUEEN_VALUE, 11))
+            deck.append(Card.create(Constants.SUIT_CLUBS, Constants.KING_VALUE, 12))
+            deck.append(Card.create(Constants.SUIT_DIAMONDS, Constants.ACE_VALUE, 13))
+            deck.append(Card.create(Constants.SUIT_DIAMONDS, Constants.TWO_VALUE, 14))
+            deck.append(Card.create(Constants.SUIT_DIAMONDS, Constants.THREE_VALUE, 15))
+            deck.append(Card.create(Constants.SUIT_DIAMONDS, Constants.FOUR_VALUE, 16))
+            deck.append(Card.create(Constants.SUIT_DIAMONDS, Constants.FIVE_VALUE, 17))
+            deck.append(Card.create(Constants.SUIT_DIAMONDS, Constants.SIX_VALUE, 18))
+            deck.append(Card.create(Constants.SUIT_DIAMONDS, Constants.SEVEN_VALUE, 19))
+            deck.append(Card.create(Constants.SUIT_DIAMONDS, Constants.EIGHT_VALUE, 20))
+            deck.append(Card.create(Constants.SUIT_DIAMONDS, Constants.NINE_VALUE, 21))
+            deck.append(Card.create(Constants.SUIT_DIAMONDS, Constants.TEN_VALUE, 22))
+            deck.append(Card.create(Constants.SUIT_DIAMONDS, Constants.JACK_VALUE, 23))
+            deck.append(Card.create(Constants.SUIT_DIAMONDS, Constants.QUEEN_VALUE, 24))
+            deck.append(Card.create(Constants.SUIT_DIAMONDS, Constants.KING_VALUE, 25))
+            deck.append(Card.create(Constants.SUIT_HEARTS, Constants.ACE_VALUE, 26))
+            deck.append(Card.create(Constants.SUIT_HEARTS, Constants.TWO_VALUE, 27))
+            deck.append(Card.create(Constants.SUIT_HEARTS, Constants.THREE_VALUE, 28))
+            deck.append(Card.create(Constants.SUIT_HEARTS, Constants.FOUR_VALUE, 29))
+            deck.append(Card.create(Constants.SUIT_HEARTS, Constants.FIVE_VALUE, 30))
+            deck.append(Card.create(Constants.SUIT_HEARTS, Constants.SIX_VALUE, 31))
+            deck.append(Card.create(Constants.SUIT_HEARTS, Constants.SEVEN_VALUE, 32))
+            deck.append(Card.create(Constants.SUIT_HEARTS, Constants.EIGHT_VALUE, 33))
+            deck.append(Card.create(Constants.SUIT_HEARTS, Constants.NINE_VALUE, 34))
+            deck.append(Card.create(Constants.SUIT_HEARTS, Constants.TEN_VALUE, 35))
+            deck.append(Card.create(Constants.SUIT_HEARTS, Constants.JACK_VALUE, 36))
+            deck.append(Card.create(Constants.SUIT_HEARTS, Constants.QUEEN_VALUE, 37))
+            deck.append(Card.create(Constants.SUIT_HEARTS, Constants.KING_VALUE, 38))
+            deck.append(Card.create(Constants.SUIT_SPADES, Constants.ACE_VALUE, 39))
+            deck.append(Card.create(Constants.SUIT_SPADES, Constants.TWO_VALUE, 40))
+            deck.append(Card.create(Constants.SUIT_SPADES, Constants.THREE_VALUE, 41))
+            deck.append(Card.create(Constants.SUIT_SPADES, Constants.FOUR_VALUE, 42))
+            deck.append(Card.create(Constants.SUIT_SPADES, Constants.FIVE_VALUE, 43))
+            deck.append(Card.create(Constants.SUIT_SPADES, Constants.SIX_VALUE, 44))
+            deck.append(Card.create(Constants.SUIT_SPADES, Constants.SEVEN_VALUE, 45))
+            deck.append(Card.create(Constants.SUIT_SPADES, Constants.EIGHT_VALUE, 46))
+            deck.append(Card.create(Constants.SUIT_SPADES, Constants.NINE_VALUE, 47))
+            deck.append(Card.create(Constants.SUIT_SPADES, Constants.TEN_VALUE, 48))
+            deck.append(Card.create(Constants.SUIT_SPADES, Constants.JACK_VALUE, 49))
+            deck.append(Card.create(Constants.SUIT_SPADES, Constants.QUEEN_VALUE, 50))
+            deck.append(Card.create(Constants.SUIT_SPADES, Constants.KING_VALUE, 51))
+            deck.append(Card.create(Constants.SUIT_JOKER, Constants.BLACK_JOKER_VALUE, 52))
+            deck.append(Card.create(Constants.SUIT_JOKER, Constants.RED_JOKER_VALUE, 53))
+
+        return deck

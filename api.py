@@ -1,3 +1,4 @@
+from constants import *
 from protorpc import remote
 from models import *
 import datetime
@@ -19,8 +20,13 @@ class CardGamesApi(remote.Service):
                  http_method='POST',
                  name='game.add')
     def GameAdd(self, game):
-        # TODO: type
-        # TODO: create deck
+        from deck import Deck
+        # TODO: type configurable
+        game_type = GameType.TYPE_CRAZYEIGHTS
+
+        # Set up the basic game model and store it
+        game.game_type = GameType.get_name(game_type)
+        game.deck = Deck.get_deck(game_type)
         game.is_active = True
         game.lastmodified = datetime.datetime.now()
         game.put()

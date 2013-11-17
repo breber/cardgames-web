@@ -6,15 +6,23 @@ class Card(ndb.Model):
     value = ndb.IntegerProperty()
     idNum = ndb.IntegerProperty()
 
-    def __init__(self, suit, value, idNum):
-        self.suit = suit
-        self.value = value
-        self.idNum = idNum
+    @classmethod
+    def create(cls, suit, value, idNum):
+        toRet = Card()
+        toRet.suit = suit
+        toRet.value = value
+        toRet.idNum = idNum
 
-    def __init__(self, c):
-        self.suit = c.suit
-        self.value = c.value
-        self.idNum = c.idNum
+        return toRet
+
+    @classmethod
+    def create_from_card(cls, card):
+        toRet = Card()
+        toRet.suit = card.suit
+        toRet.value = card.value
+        toRet.idNum = card.idNum
+
+        return toRet
 
     def toJSON(self):
         return [ { Constants.SUIT:suit, Constants.VALUE:value, Constants.ID:idNum } ]
