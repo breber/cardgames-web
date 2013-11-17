@@ -3,6 +3,7 @@ wwg.cardgames = wwg.cardgames || {};
 
 
 wwg.cardgames.init = function(apiRoot) {
+    console.log("wwg.cardgames.init");
     var apisToLoad;
     var callback = function() {
         if (--apisToLoad == 0) {
@@ -12,20 +13,26 @@ wwg.cardgames.init = function(apiRoot) {
 
     apisToLoad = 1; // must match number of calls to gapi.client.load()
     gapi.client.load('cardgames', 'v1', callback, apiRoot);
+
+    // Set up our UI
+    wwg.cardgames.draw.init();
 };
 
 wwg.cardgames.loadPage = function() {
+    console.log("wwg.cardgames.loadPage");
     wwg.cardgames.listAllGames();
     wwg.cardgames.enableButtons();
 }
 
 wwg.cardgames.enableButtons = function() {
+    console.log("wwg.cardgames.enableButtons");
     document.getElementById('create-game').onclick = function() {
         wwg.cardgames.createGame();
     }
 };
 
 wwg.cardgames.createGame = function() {
+    console.log("wwg.cardgames.createGame");
     gapi.client.cardgames.game.add().execute(function(resp) {
         if (!resp.code) {
             wwg.cardgames.listAllGames();
@@ -34,6 +41,7 @@ wwg.cardgames.createGame = function() {
 };
 
 wwg.cardgames.listAllGames = function() {
+    console.log("wwg.cardgames.listAllGames");
     gapi.client.cardgames.game.list.all().execute(function(resp) {
         if (!resp.code) {
             console.log(resp);

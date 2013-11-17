@@ -9,41 +9,28 @@
 {% block externalcss %}{% endblock %}
 <script type="text/javascript" src="/static/js/ext/jquery.min.js"></script>
 <script type="text/javascript" src="/static/js/ext/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/js/ext/bootstrap-theme.min.js"></script>
 </head>
 
 <body>
-  <div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar navbar-default navbar-inverse navbar-fixed-top">
     <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="/">Card Games</a>
-      </div>
-
-      <div class="navbar-collapse collapse navbar-responsive-collapse">
+      <a class="navbar-brand" href="/">Card Games</a>
+    </div>
+      <!-- <div class="navbar-collapse collapse navbar-responsive-collapse">
         <ul class="nav navbar-nav">
           <li><a href="javascript:void(0);" id="create-game">Create Game</a></li>
         </ul>
-      </div>
-    </div>
+      </div> -->
   </div>
 
-  <div id="wrap">
-    <div class="container-fluid center-block top-margin">
-      <div id="content">{% block content %}{% endblock %}</div>
-      <div id="push"></div>
-    </div>
-  </div>
+  {% block content %}{% endblock %}
 
-  <div id="footer">
+  <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
     <div class="container">
-      <p>Copyright (c) {{ currentYear }}</p>
+      <p class="navbar-text">Copyright (c) {{ currentYear }}</p>
     </div>
-  </div>
+  </nav>
 
   {% block externaljs %}{% endblock %}
 </body>
