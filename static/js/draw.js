@@ -28,31 +28,28 @@ wwg.cardgames.draw.updateUi = function(canvas, gamestate) {
     ctx.fillText("Card Games", canvas.width / 2, 7, canvas.width);
 
     // Background image
-    var table = new Image();
-    table.src = "/static/img/wooden_top.jpg";
-    table.onload = function() {
-        ctx.drawImage(table, 0, 50, canvas.width, canvas.height - 50);
+    var tableImage = wwg.cardgames.util.getImage("wooden_top");
+    ctx.drawImage(tableImage, 0, 50, canvas.width, canvas.height - 50);
 
-        // If we have a game, draw the users and cards
-        if (gamestate !== undefined && gamestate !== null) {
-            // TODO: draw game state
-        } else {
-            ctx.fillStyle = "#FFC90E";
-            ctx.strokeStyle = "#000";
-            var paddingSide = 100;
-            var width = (canvas.width - (2 * paddingSide));
-            var height = 100;
-            var startY = ((canvas.height - 50) / 2);
-            wwg.cardgames.draw.roundRect(ctx, paddingSide, startY, width, height, 10, true, true);
+    // If we have a game, draw the users and cards
+    if (gamestate !== undefined && gamestate !== null) {
+        // TODO: draw game state
+    } else {
+        ctx.fillStyle = "#FFC90E";
+        ctx.strokeStyle = "#000";
+        var paddingSide = 100;
+        var width = (canvas.width - (2 * paddingSide));
+        var height = 100;
+        var startY = ((canvas.height - 50) / 2);
+        wwg.cardgames.draw.roundRect(ctx, paddingSide, startY, width, height, 10, true, true);
 
-            // Draw text
-            ctx.fillStyle = "#000";
-            ctx.font = "bold 36px sans-serif";
-            ctx.textAlign = "center";
-            ctx.textBaseline = "middle";
-            ctx.fillText("Card Games!", paddingSide + width / 2, startY + height / 2, width);
-        }
-    };
+        // Draw text
+        ctx.fillStyle = "#000";
+        ctx.font = "bold 36px sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("Card Games!", paddingSide + width / 2, startY + height / 2, width);
+    }
 };
 
 

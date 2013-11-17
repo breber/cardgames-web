@@ -4,6 +4,8 @@ runtime: python27
 api_version: 1
 threadsafe: yes
 
+default_expiration: "4d 5h"
+
 handlers:
 # Endpoints handler
 - url: /_ah/spi/.*

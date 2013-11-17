@@ -14,8 +14,11 @@ wwg.cardgames.init = function(apiRoot) {
     apisToLoad = 1; // must match number of calls to gapi.client.load()
     gapi.client.load('cardgames', 'v1', callback, apiRoot);
 
-    // Set up our UI
-    wwg.cardgames.draw.init();
+    // Initialize our image cache
+    wwg.cardgames.util.initImages(function() {
+        // Set up our UI
+        wwg.cardgames.draw.init();
+    });
 };
 
 wwg.cardgames.loadPage = function() {
