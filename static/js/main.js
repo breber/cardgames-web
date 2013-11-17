@@ -64,3 +64,6 @@ function init() {
     wwg.cardgames.init(ROOT);
 }
 
+$(window).on('resize orientationChanged', function() {
+    wwg.cardgames.draw.init();
+});
