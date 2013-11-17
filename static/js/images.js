@@ -3,6 +3,8 @@ wwg.cardgames = wwg.cardgames || {};
 wwg.cardgames.util = wwg.cardgames.util || {};
 
 wwg.cardgames.util.initImages = function(callback) {
+    wwg.cardgames.util.log("wwg.cardgames.util.initImages");
+
     var images = {};
     images['wooden_top'] = '/static/img/wooden_top.jpg';
     images['back_blue_4'] = '/static/img/cards/back_blue_4.png';
@@ -68,6 +70,8 @@ wwg.cardgames.util.initImages = function(callback) {
 };
 
 wwg.cardgames.util.getImage = function(name) {
+    wwg.cardgames.util.log("wwg.cardgames.util.getImage");
+
     if (typeof wwg.cardgames.util._images == "undefined") {
         return undefined;
     }
@@ -76,6 +80,8 @@ wwg.cardgames.util.getImage = function(name) {
 }
 
 wwg.cardgames.util.loadImages = function(sources, callback) {
+    wwg.cardgames.util.log("wwg.cardgames.util.loadImages");
+
     var images = {};
     var loadedImages = 0;
     var numImages = 0;

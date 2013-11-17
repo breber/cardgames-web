@@ -3,7 +3,7 @@ wwg.cardgames = wwg.cardgames || {};
 
 
 wwg.cardgames.init = function(apiRoot) {
-    console.log("wwg.cardgames.init");
+    wwg.cardgames.util.log("wwg.cardgames.init");
     var apisToLoad;
     var callback = function() {
         if (--apisToLoad == 0) {
@@ -22,13 +22,13 @@ wwg.cardgames.init = function(apiRoot) {
 };
 
 wwg.cardgames.loadPage = function() {
-    console.log("wwg.cardgames.loadPage");
+    wwg.cardgames.util.log("wwg.cardgames.loadPage");
     wwg.cardgames.listAllGames();
     wwg.cardgames.enableButtons();
 }
 
 wwg.cardgames.enableButtons = function() {
-    console.log("wwg.cardgames.enableButtons");
+    wwg.cardgames.util.log("wwg.cardgames.enableButtons");
 
     // TODO: add an on click handler for the create game button
     // document.getElementById('create-game').onclick = function() {
@@ -37,7 +37,7 @@ wwg.cardgames.enableButtons = function() {
 };
 
 wwg.cardgames.createGame = function() {
-    console.log("wwg.cardgames.createGame");
+    wwg.cardgames.util.log("wwg.cardgames.createGame");
     gapi.client.cardgames.game.add().execute(function(resp) {
         if (!resp.code) {
             wwg.cardgames.listAllGames();
@@ -46,7 +46,7 @@ wwg.cardgames.createGame = function() {
 };
 
 wwg.cardgames.listAllGames = function() {
-    console.log("wwg.cardgames.listAllGames");
+    wwg.cardgames.util.log("wwg.cardgames.listAllGames");
     gapi.client.cardgames.game.list.all().execute(function(resp) {
         if (!resp.code) {
             console.log(resp);

@@ -3,7 +3,7 @@ wwg.cardgames = wwg.cardgames || {};
 wwg.cardgames.draw = wwg.cardgames.draw || {};
 
 wwg.cardgames.draw.init = function() {
-    console.log("wwg.cardgames.draw.init");
+    wwg.cardgames.util.log("wwg.cardgames.draw.init");
 
     // Make the canvas fit the screen
     var canvas = document.getElementById('canvas');
@@ -15,7 +15,7 @@ wwg.cardgames.draw.init = function() {
 };
 
 wwg.cardgames.draw.updateUi = function(canvas, gamestate) {
-    console.log("wwg.cardgames.draw.updateUi");
+    wwg.cardgames.util.log("wwg.cardgames.draw.updateUi");
     var ctx = canvas.getContext('2d');
 
     // Draw top bar
@@ -54,7 +54,7 @@ wwg.cardgames.draw.updateUi = function(canvas, gamestate) {
 
 
 wwg.cardgames.draw.roundRect = function(ctx, x, y, width, height, radius, fill, stroke) {
-    console.log("wwg.cardgames.draw.updateUi");
+    wwg.cardgames.util.log("wwg.cardgames.draw.updateUi");
 
     if (typeof stroke == "undefined") {
         stroke = true;
