@@ -4,33 +4,19 @@
 <head>
 <title>Card Games</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link type="text/css" href="/static/css/bootstrap.min.css" rel="stylesheet" />
 <link type="text/css" href="/static/css/auto.css" rel="stylesheet" />
 {% block externalcss %}{% endblock %}
-<script type="text/javascript" src="/static/js/ext/jquery.min.js"></script>
-<script type="text/javascript" src="/static/js/ext/bootstrap.min.js"></script>
-<script type="text/javascript" src="/static/js/ext/bootstrap-theme.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
 </head>
 
 <body>
-  <div class="navbar navbar-default navbar-inverse navbar-fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="/">Card Games</a>
-    </div>
-      <!-- <div class="navbar-collapse collapse navbar-responsive-collapse">
-        <ul class="nav navbar-nav">
-          <li><a href="javascript:void(0);" id="create-game">Create Game</a></li>
-        </ul>
-      </div> -->
-  </div>
-
   {% block content %}{% endblock %}
 
-  <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+  <!-- <nav id="navbar-bottom" class="navbar navbar-default navbar-fixed-bottom" role="navigation">
     <div class="container">
       <p class="navbar-text">Copyright (c) {{ currentYear }}</p>
     </div>
-  </nav>
+  </nav> -->
 
   {% block externaljs %}{% endblock %}
 </body>

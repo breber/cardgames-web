@@ -26,9 +26,11 @@ wwg.cardgames.loadPage = function() {
 
 wwg.cardgames.enableButtons = function() {
     console.log("wwg.cardgames.enableButtons");
-    document.getElementById('create-game').onclick = function() {
-        wwg.cardgames.createGame();
-    }
+
+    // TODO: add an on click handler for the create game button
+    // document.getElementById('create-game').onclick = function() {
+    //     wwg.cardgames.createGame();
+    // }
 };
 
 wwg.cardgames.createGame = function() {
@@ -46,10 +48,11 @@ wwg.cardgames.listAllGames = function() {
         if (!resp.code) {
             console.log(resp);
             for (var i = 0; i < resp.items.length; i++) {
-                var item = resp.items[i];
-                var element = document.createElement('div');
-                element.innerHTML = item.server_id + " --> " + " (" + item.lastmodified + ")";
-                document.getElementById('content').appendChild(element);
+                // TODO: implement
+                // var item = resp.items[i];
+                // var element = document.createElement('div');
+                // element.innerHTML = item.server_id + " --> " + " (" + item.lastmodified + ")";
+                // document.getElementById('content').appendChild(element);
             }
         }
     });
