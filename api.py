@@ -20,6 +20,7 @@ class CardGamesApi(remote.Service):
                  name='game.add')
     def GameAdd(self, game):
         # TODO: type
+        # TODO: create deck
         game.is_active = True
         game.lastmodified = datetime.datetime.now()
         game.put()

@@ -3,6 +3,7 @@ from google.appengine.ext import ndb
 from protorpc import remote, messages
 from endpoints_proto_datastore.ndb import EndpointsModel, EndpointsAliasProperty
 
+import card
 import endpoints
 
 class Game(EndpointsModel):
@@ -10,6 +11,7 @@ class Game(EndpointsModel):
 
     game_type = ndb.StringProperty()
     is_active = ndb.BooleanProperty()
+    deck = ndb.StructuredProperty(card.Card, repeated=True)
     users = ndb.StringProperty()
     lastmodified = ndb.DateTimeProperty()
 
