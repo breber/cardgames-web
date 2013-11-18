@@ -35,26 +35,62 @@ wwg.cardgames.draw.updateUi = function(canvas, gamestate) {
     if (gamestate !== undefined && gamestate !== null) {
         // TODO: draw game state
     } else {
-        ctx.fillStyle = "#FFC90E";
-        ctx.strokeStyle = "#000";
-        var paddingSide = 100;
-        var width = (canvas.width - (2 * paddingSide));
-        var height = 100;
-        var startY = ((canvas.height - 50) / 2);
-        wwg.cardgames.draw.roundRect(ctx, paddingSide, startY, width, height, 10, true, true);
-
-        // Draw text
-        ctx.fillStyle = "#000";
-        ctx.font = "bold 36px sans-serif";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText("Card Games!", paddingSide + width / 2, startY + height / 2, width);
+        wwg.cardgames.draw.drawMainMenu(canvas);
     }
 };
 
+wwg.cardgames.draw.drawMainMenu = function(canvas) {
+    wwg.cardgames.util.log("wwg.cardgames.draw.drawMainMenu");
+
+    var ctx = canvas.getContext('2d');
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+
+    var paddingSide = 100;
+    var paddingSide2 = 150;
+
+    var bigButtonRatio = .166;
+    var smallButtonRatio = .1;
+
+    var largeHeight = (canvas.height * bigButtonRatio);
+    var smallHeight = (canvas.height * smallButtonRatio);
+    var largeWidth = (canvas.width - (2 * paddingSide));
+    var smallWidth = (canvas.width - (2 * paddingSide2));
+
+    var totalHeight = largeHeight + 10 + smallHeight + 10 + smallHeight;
+    var startY = (canvas.height - totalHeight) / 2;
+
+    // Create Game button
+    ctx.fillStyle = "#FFC90E";
+    ctx.strokeStyle = "#000";
+    wwg.cardgames.draw.roundRect(ctx, paddingSide, startY, largeWidth, largeHeight, 10, true, true);
+    ctx.fillStyle = "#000";
+    ctx.font = "bold 36px sans-serif";
+    ctx.fillText("Create Game", paddingSide + largeWidth / 2, startY + largeHeight / 2, largeWidth);
+    startY += largeHeight + 10;
+
+
+    // Join Game button
+    ctx.fillStyle = "#FFC90E";
+    ctx.strokeStyle = "#000";
+    wwg.cardgames.draw.roundRect(ctx, paddingSide2, startY, smallWidth, smallHeight, 10, true, true);
+    ctx.fillStyle = "#000";
+    ctx.font = "bold 30px sans-serif";
+    ctx.fillText("Join Game", paddingSide2 + smallWidth / 2, startY + smallHeight / 2, smallWidth);
+    startY += smallHeight + 10;
+
+
+    // Rules button
+    ctx.fillStyle = "#FFC90E";
+    ctx.strokeStyle = "#000";
+    wwg.cardgames.draw.roundRect(ctx, paddingSide2, startY, smallWidth, smallHeight, 10, true, true);
+    ctx.fillStyle = "#000";
+    ctx.font = "bold 30px sans-serif";
+    ctx.fillText("Rules", paddingSide2 + smallWidth / 2, startY + smallHeight / 2, smallWidth);
+};
 
 wwg.cardgames.draw.roundRect = function(ctx, x, y, width, height, radius, fill, stroke) {
-    wwg.cardgames.util.log("wwg.cardgames.draw.updateUi");
+    wwg.cardgames.util.log("wwg.cardgames.draw.roundRect");
 
     if (typeof stroke == "undefined") {
         stroke = true;
