@@ -11,14 +11,13 @@ wwg.cardgames.draw.init = function() {
     canvas.height = window.innerHeight;
 
     // Draw the initial state
-    wwg.cardgames.draw.updateUi(canvas);
+    wwg.cardgames.draw.drawMainMenu(canvas);
 };
 
-wwg.cardgames.draw.updateUi = function(canvas, gamestate) {
-    wwg.cardgames.util.log("wwg.cardgames.draw.updateUi");
+wwg.cardgames.draw.drawMenubar = function(canvas) {
+    wwg.cardgames.util.log("wwg.cardgames.draw.drawMenubar");
     var ctx = canvas.getContext('2d');
 
-    // Draw top bar
     ctx.fillStyle = "#000";
     ctx.fillRect(0, 0, canvas.width, 50);
     ctx.fillStyle = "#FFF";
@@ -26,21 +25,20 @@ wwg.cardgames.draw.updateUi = function(canvas, gamestate) {
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText("Card Games", canvas.width / 2, 25, canvas.width);
+};
 
-    // Background image
+wwg.cardgames.draw.drawBackground = function(canvas) {
+    wwg.cardgames.util.log("wwg.cardgames.draw.drawBackground");
+    var ctx = canvas.getContext('2d');
     var tableImage = wwg.cardgames.util.getImage("wooden_top");
-    ctx.drawImage(tableImage, 0, 50, canvas.width, canvas.height - 50);
-
-    // If we have a game, draw the users and cards
-    if (gamestate !== undefined && gamestate !== null) {
-        // TODO: draw game state
-    } else {
-        wwg.cardgames.draw.drawMainMenu(canvas);
-    }
+    ctx.drawImage(tableImage, 0, 0, canvas.width, canvas.height);
 };
 
 wwg.cardgames.draw.drawMainMenu = function(canvas) {
     wwg.cardgames.util.log("wwg.cardgames.draw.drawMainMenu");
+
+    wwg.cardgames.draw.drawBackground(canvas);
+    wwg.cardgames.draw.drawMenubar(canvas);
 
     var ctx = canvas.getContext('2d');
     ctx.textAlign = "center";
@@ -93,6 +91,8 @@ wwg.cardgames.draw.drawRules = function(canvas) {
     wwg.cardgames.util.log("wwg.cardgames.draw.drawRules");
 
     // TODO: add back button
+    wwg.cardgames.draw.drawBackground(canvas);
+    wwg.cardgames.draw.drawMenubar(canvas);
 
     var textblocks = [
         "The basic game of Crazy Eights is played with a standard deck of 52 cards. Each player will be dealt five cards and the rest of the cards will be put into a draw pile which is placed face down on the playing table. After the cards are dealt, one card will be taken from and placed next to the draw pile face up. This will serve as the discard pile. The game will start with player 1 and continue in a counterclockwise fashion around the table. During each turn a player will either need to play a card from their hand or select one card from the draw pile.",
@@ -134,6 +134,18 @@ wwg.cardgames.draw.drawRules = function(canvas) {
     }
 };
 
+wwg.cardgames.draw.drawGameboard = function(canvas, gamestate) {
+    wwg.cardgames.util.log("wwg.cardgames.draw.updateUi");
+    var ctx = canvas.getContext('2d');
+
+    wwg.cardgames.draw.drawBackground(canvas);
+    wwg.cardgames.draw.drawMenubar(canvas);
+
+    // If we have a game, draw the users and cards
+    if (gamestate !== undefined && gamestate !== null) {
+        // TODO: draw game state
+    }
+};
 
 // Drawing Utility functions
 wwg.cardgames.draw.wrapText = function(context, text, x, y, maxWidth, lineHeight) {
