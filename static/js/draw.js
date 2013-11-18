@@ -22,10 +22,10 @@ wwg.cardgames.draw.updateUi = function(canvas, gamestate) {
     ctx.fillStyle = "#000";
     ctx.fillRect(0, 0, canvas.width, 50);
     ctx.fillStyle = "#FFF";
-    ctx.font = "bold 30px sans-serif";
+    ctx.font = "bold " + (50 * .5) + "px sans-serif";
     ctx.textAlign = "center";
-    ctx.textBaseline = "top";
-    ctx.fillText("Card Games", canvas.width / 2, 7, canvas.width);
+    ctx.textBaseline = "middle";
+    ctx.fillText("Card Games", canvas.width / 2, 25, canvas.width);
 
     // Background image
     var tableImage = wwg.cardgames.util.getImage("wooden_top");
@@ -65,7 +65,7 @@ wwg.cardgames.draw.drawMainMenu = function(canvas) {
     ctx.strokeStyle = "#000";
     wwg.cardgames.draw.roundRect(ctx, paddingSide, startY, largeWidth, largeHeight, 10, true, true);
     ctx.fillStyle = "#000";
-    ctx.font = "bold 36px sans-serif";
+    ctx.font = "bold " + (largeHeight * .5) + "px sans-serif";
     ctx.fillText("Create Game", paddingSide + largeWidth / 2, startY + largeHeight / 2, largeWidth);
     startY += largeHeight + 10;
 
@@ -75,7 +75,7 @@ wwg.cardgames.draw.drawMainMenu = function(canvas) {
     ctx.strokeStyle = "#000";
     wwg.cardgames.draw.roundRect(ctx, paddingSide2, startY, smallWidth, smallHeight, 10, true, true);
     ctx.fillStyle = "#000";
-    ctx.font = "bold 30px sans-serif";
+    ctx.font = "bold " + (smallHeight * .5) + "px sans-serif";
     ctx.fillText("Join Game", paddingSide2 + smallWidth / 2, startY + smallHeight / 2, smallWidth);
     startY += smallHeight + 10;
 
@@ -85,7 +85,7 @@ wwg.cardgames.draw.drawMainMenu = function(canvas) {
     ctx.strokeStyle = "#000";
     wwg.cardgames.draw.roundRect(ctx, paddingSide2, startY, smallWidth, smallHeight, 10, true, true);
     ctx.fillStyle = "#000";
-    ctx.font = "bold 30px sans-serif";
+    ctx.font = "bold " + (smallHeight * .5) + "px sans-serif";
     ctx.fillText("Rules", paddingSide2 + smallWidth / 2, startY + smallHeight / 2, smallWidth);
 };
 
