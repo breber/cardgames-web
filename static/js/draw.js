@@ -7,11 +7,33 @@ wwg.cardgames.draw.init = function() {
 
     // Make the canvas fit the screen
     var canvas = document.getElementById('canvas');
+    canvas.addEventListener('click', wwg.cardgames.draw.onClick);
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
+    // Create an array of buttons
+    wwg.cardgames.draw.buttons = [];
+
     // Draw the initial state
     wwg.cardgames.draw.drawMainMenu(canvas);
+};
+
+wwg.cardgames.draw.onClick = function(event) {
+    wwg.cardgames.util.log("wwg.cardgames.draw.onClick");
+
+    // Loop through the buttons and see if the click is within any of them
+    for (var i = 0; i < wwg.cardgames.draw.buttons.length; i++) {
+        var buttonBox = wwg.cardgames.draw.buttons[i].box;
+
+        if (event.pageX >= buttonBox[0] &&
+            event.pageX <= buttonBox[2] &&
+            event.pageY >= buttonBox[1] &&
+            event.pageY <= buttonBox[3])
+        {
+            var canvas = document.getElementById('canvas');
+            wwg.cardgames.draw.buttons[i].callback(canvas);
+        }
+    }
 };
 
 wwg.cardgames.draw.drawMenubar = function(canvas) {
@@ -57,6 +79,7 @@ wwg.cardgames.draw.drawMainMenu = function(canvas) {
 
     var totalHeight = largeHeight + 10 + smallHeight + 10 + smallHeight;
     var startY = (canvas.height - totalHeight) / 2;
+    var boundingBox = [paddingSide, startY, paddingSide + largeWidth, startY + largeHeight];
 
     // Create Game button
     ctx.fillStyle = "#FFC90E";
@@ -66,9 +89,11 @@ wwg.cardgames.draw.drawMainMenu = function(canvas) {
     ctx.font = "bold " + (largeHeight * .5) + "px sans-serif";
     ctx.fillText("Create Game", paddingSide + largeWidth / 2, startY + largeHeight / 2, largeWidth);
     startY += largeHeight + 10;
+    wwg.cardgames.draw.buttons.push({ box: boundingBox, callback: wwg.cardgames.draw.drawGameboard });
 
 
     // Join Game button
+    boundingBox = [paddingSide2, startY, paddingSide2 + smallWidth, startY + smallHeight];
     ctx.fillStyle = "#FFC90E";
     ctx.strokeStyle = "#000";
     wwg.cardgames.draw.roundRect(ctx, paddingSide2, startY, smallWidth, smallHeight, 10, true, true);
@@ -76,15 +101,18 @@ wwg.cardgames.draw.drawMainMenu = function(canvas) {
     ctx.font = "bold " + (smallHeight * .5) + "px sans-serif";
     ctx.fillText("Join Game", paddingSide2 + smallWidth / 2, startY + smallHeight / 2, smallWidth);
     startY += smallHeight + 10;
+    wwg.cardgames.draw.buttons.push({ box: boundingBox, callback: wwg.cardgames.draw.drawGameboard });
 
 
     // Rules button
+    boundingBox = [paddingSide2, startY, paddingSide2 + smallWidth, startY + smallHeight];
     ctx.fillStyle = "#FFC90E";
     ctx.strokeStyle = "#000";
     wwg.cardgames.draw.roundRect(ctx, paddingSide2, startY, smallWidth, smallHeight, 10, true, true);
     ctx.fillStyle = "#000";
     ctx.font = "bold " + (smallHeight * .5) + "px sans-serif";
     ctx.fillText("Rules", paddingSide2 + smallWidth / 2, startY + smallHeight / 2, smallWidth);
+    wwg.cardgames.draw.buttons.push({ box: boundingBox, callback: wwg.cardgames.draw.drawRules });
 };
 
 wwg.cardgames.draw.drawRules = function(canvas) {
