@@ -37,7 +37,7 @@ class CrazyEightsTabletGame:
     '''
       A list of all the cards in the shuffle deck
     '''
-    huffledDeck = []
+    shuffledDeck = []
 
     '''
       A list of all the cards in the discard pile
