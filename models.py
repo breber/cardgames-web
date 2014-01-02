@@ -6,11 +6,16 @@ from endpoints_proto_datastore.ndb import EndpointsModel, EndpointsAliasProperty
 import card
 import endpoints
 
+class GameState:
+    STATE_CREATED = 0
+    STATE_STARTED = 1
+    STATE_COMPLETED = 2
+
 class Game(EndpointsModel):
     _message_fields_schema = ('server_id', 'game_type', 'is_active', 'deck', 'users', 'current_user', 'lastmodified')
 
     game_type = ndb.StringProperty()
-    is_active = ndb.BooleanProperty()
+    state = ndb.IntegerProperty(default=GameState.STATE_CREATED)
     deck = ndb.StructuredProperty(card.Card, repeated=True)
     users = ndb.StringProperty(repeated=True)
     current_user = ndb.IntegerProperty()

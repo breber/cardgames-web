@@ -27,33 +27,56 @@ class CardGamesApi(remote.Service):
         # Set up the basic game model and store it
         game.game_type = GameType.get_name(game_type)
         game.deck = Deck.get_deck(game_type)
-        game.is_active = True
         game.lastmodified = datetime.datetime.now()
         game.put()
         return game
 
-    @Game.method(path='game/join',
+    @Game.method(path='game/join/{id}',
                  http_method='POST',
-                 name='game.join')
-    def GameJoin():
+                 name='game.join'
+                 request_fields=('id',))
+    def GameJoin(self, game):
         pass
 
-    @Game.method(path='game/start',
+    @Game.method(path='game/start/{id}',
                  http_method='POST',
-                 name='game.start')
-    def GameStart():
+                 name='game.start',
+                 request_fields=('id',))
+    def GameStart(self, game):
+        if not game.from_datastore:
+            raise endpoints.NotFoundException('game not found.')
+
+        # If the game state isn't created, then we shouldn't be calling this method
+        if game.state != GameState.STATE_CREATED:
+            raise endpoints.BadRequestException('game already started')
+
+        # If we don't have a valid number of players, don't start the game
+        if len(game.users) < 2 or len(game.users) > 5 : # TODO: do we want to allow one player games?
+            raise endpoints.BadRequestException('invalid number of players')
+
+        # Mark the game as started
+        game.state = GameState.STATE_STARTED
+        game.put()
+
+        # TODO: send notification to all users
+
+        return game
+
+    @Game.method(path='game/move/{id}',
+                 http_method='POST',
+                 name='game.move',
+                 request_fields=('id',))
+    def GameMakeMove(self, game):
         pass
 
-    @Game.method(path='game/move',
-                 http_method='POST',
-                 name='game.move')
-    def GameMakeMove():
-        pass
+    @Game.method(path='game/status/{id}',
+                 http_method='GET',
+                 name='game.status',
+                 request_fields=('id',))
+    def GameStatus(self, game):
+        if not game.from_datastore:
+            raise endpoints.NotFoundException('game not found.')
 
-    @Game.method(path='game/status',
-                 http_method='POST',
-                 name='game.status')
-    def GameStatus():
-        pass
+        return game
 
 application = endpoints.api_server([CardGamesApi], restricted=False)
