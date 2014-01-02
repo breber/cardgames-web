@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 from webapp2_extras import jinja2
-import models
 import webapp2
 import logging
 import utils

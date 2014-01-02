@@ -1,7 +1,8 @@
 from constants import Constants
+from endpoints_proto_datastore.ndb import EndpointsModel, EndpointsAliasProperty
 from google.appengine.ext import ndb
 
-class Card(ndb.Model):
+class Card(EndpointsModel):
     suit = ndb.IntegerProperty()
     value = ndb.IntegerProperty()
     idNum = ndb.IntegerProperty()

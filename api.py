@@ -1,6 +1,6 @@
 from constants import *
+from game import *
 from protorpc import remote
-from models import *
 import datetime
 import endpoints
 import logging
@@ -33,7 +33,7 @@ class CardGamesApi(remote.Service):
 
     @Game.method(path='game/join/{id}',
                  http_method='POST',
-                 name='game.join'
+                 name='game.join',
                  request_fields=('id',))
     def GameJoin(self, game):
         pass
