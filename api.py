@@ -14,7 +14,7 @@ class CardGamesApi(remote.Service):
     @Game.query_method(path='game/list/all',
                        name='game.list.all')
     def GameListAll(self, query):
-        return query.filter(Game.is_active == True)
+        return query.filter(Game.state == GameState.STATE_CREATED)
 
     @Game.method(path='game/add',
                  http_method='POST',
