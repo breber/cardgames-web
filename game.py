@@ -1,6 +1,5 @@
 from datetime import datetime
 from google.appengine.ext import ndb
-from protorpc import remote, messages
 from endpoints_proto_datastore.ndb import EndpointsModel, EndpointsAliasProperty
 
 import card
@@ -25,7 +24,3 @@ class Game(EndpointsModel):
     @EndpointsAliasProperty(property_type=messages.StringField)
     def server_id(self):
         return str(self.key.id())
-
-# API specific messages
-class UnusedRequest(messages.Message):
-    unused = messages.StringField(1, required=False)
