@@ -32,3 +32,8 @@ class Game(EndpointsModel):
     @EndpointsAliasProperty(property_type=messages.StringField)
     def server_id(self):
         return str(self.key.id())
+
+
+    def start(self):
+        # Nothing to do at this level
+        pass

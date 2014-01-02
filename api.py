@@ -50,9 +50,8 @@ class CardGamesApi(remote.Service):
         if game.state != GameState.STATE_CREATED:
             raise endpoints.BadRequestException('game already started')
 
-        # If we don't have a valid number of players, don't start the game
-        if len(game.users) < 2 or len(game.users) > 5 : # TODO: do we want to allow one player games?
-            raise endpoints.BadRequestException('invalid number of players')
+        # Let the game do its initialization
+        game.start()
 
         # Mark the game as started
         game.state = GameState.STATE_STARTED

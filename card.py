@@ -5,14 +5,14 @@ from google.appengine.ext import ndb
 class Card(EndpointsModel):
     suit = ndb.IntegerProperty()
     value = ndb.IntegerProperty()
-    idNum = ndb.IntegerProperty()
+    id_num = ndb.IntegerProperty()
 
     @classmethod
-    def create(cls, suit, value, idNum):
+    def create(cls, suit, value, id_num):
         toRet = Card()
         toRet.suit = suit
         toRet.value = value
-        toRet.idNum = idNum
+        toRet.id_num = id_num
 
         return toRet
 
@@ -21,30 +21,27 @@ class Card(EndpointsModel):
         toRet = Card()
         toRet.suit = card.suit
         toRet.value = card.value
-        toRet.idNum = card.idNum
+        toRet.id_num = card.id_num
 
         return toRet
 
-    def toJSON(self):
-        return [ { Constants.SUIT:suit, Constants.VALUE:value, Constants.ID:idNum } ]
+    def compare_to(self, c):
+        return self.id_num - c.id_num
 
-    def compareTo(self, c):
-        return self.idNum - c.idNum
-
-    def getSuit(self):
+    def get_suit(self):
         return self.suit
 
-    def setSuit(self, suit):
+    def set_suit(self, suit):
         self.suit = suit
 
-    def getValue(self):
+    def get_value(self):
         return self.value
 
-    def setValue(self, value):
+    def set_value(self, value):
         self.value = value
 
-    def getIdNum(self):
-        return self.idNum
+    def get_id_num(self):
+        return self.id_num
 
-    def setIdNum(self, idNum):
-        self.idNum = idNum
+    def set_id_num(self, id_num):
+        self.id_num = id_num

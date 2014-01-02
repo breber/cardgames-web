@@ -12,15 +12,15 @@ class Player(EndpointsModel):
     difficulty = ndb.IntegerProperty(default=ComputerDifficulty.DIFFICULTY_NONE)
 
 
-    def getNumCards(self) :
+    def getNumCards(self):
         return len(self.cards)
 
-    def addCard(self, card) :
+    def addCard(self, card):
         self.cards.add(card)
 
-    def removeCard(self, card) :
+    def removeCard(self, card):
         for c in self.cards:
-            if c.getIdNum() == card.getIdNum():
+            if c.get_id_num() == card.get_id_num():
                 cards.remove(c)
                 return
 
