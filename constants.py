@@ -29,3 +29,9 @@ class GameType:
             return "CrazyEights"
 
         return None
+
+class ComputerDifficulty:
+    DIFFICULTY_NONE = 0
+    DIFFICULTY_EASY = 1
+    DIFFICULTY_MEDIUM = 2
+    DIFFICULTY_HARD = 3
