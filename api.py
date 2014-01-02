@@ -32,4 +32,28 @@ class CardGamesApi(remote.Service):
         game.put()
         return game
 
+    @Game.method(path='game/join',
+                 http_method='POST',
+                 name='game.join')
+    def GameJoin():
+        pass
+
+    @Game.method(path='game/start',
+                 http_method='POST',
+                 name='game.start')
+    def GameStart():
+        pass
+
+    @Game.method(path='game/move',
+                 http_method='POST',
+                 name='game.move')
+    def GameMakeMove():
+        pass
+
+    @Game.method(path='game/status',
+                 http_method='POST',
+                 name='game.status')
+    def GameStatus():
+        pass
+
 application = endpoints.api_server([CardGamesApi], restricted=False)
