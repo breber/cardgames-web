@@ -1,57 +1,39 @@
-CARHUB_MOBILE=$(pwd)/../CarHubMobile/CarHubMobile
-CARHUB_IOS=$(pwd)/../carhub-ios
+CARDGAMES_ANDROID=$(pwd)/../cardgames/CardGames
 LIB_VERSION=1.17.0-rc
 
 # Generate the Java client library
-endpointscfg.py get_client_lib java -o . api.CarHubApi
+endpointscfg.py get_client_lib java -o . api.CardGamesApi
 
 # Unzip the generated zip
-mv carhub-v1.zip /tmp/CarHubApi.zip
+mv cardgames-v1.zip /tmp/CardGamesApi.zip
 pushd /tmp/
-yes | unzip CarHubApi.zip
-pushd carhub
+yes | unzip CardGamesApi.zip
+pushd cardgames
 
 # Remove existing Jars from the libs folder of Android app
-rm $CARHUB_MOBILE/CarHub/libs/google-*
-rm $CARHUB_MOBILE/CarHub/libs/gson-*
-rm $CARHUB_MOBILE/CarHub/libs/jsr*
+rm $CARDGAMES_ANDROID/CardGames/libs/google-*
+rm $CARDGAMES_ANDROID/CardGames/libs/gson-*
+rm $CARDGAMES_ANDROID/CardGames/libs/jsr*
 
 # Copy new jars to the Android app
-cp libs/gson-*.jar $CARHUB_MOBILE/CarHub/libs/
-cp libs/jsr*.jar $CARHUB_MOBILE/CarHub/libs/
-cp libs/google-api-client-$LIB_VERSION.jar $CARHUB_MOBILE/CarHub/libs/
-cp libs/google-api-client-android-$LIB_VERSION.jar $CARHUB_MOBILE/CarHub/libs/
-cp libs/google-http-client-$LIB_VERSION.jar $CARHUB_MOBILE/CarHub/libs/
-cp libs/google-http-client-android-$LIB_VERSION.jar $CARHUB_MOBILE/CarHub/libs/
-cp libs/google-http-client-gson-$LIB_VERSION.jar $CARHUB_MOBILE/CarHub/libs/
-cp libs/google-oauth-client-$LIB_VERSION.jar $CARHUB_MOBILE/CarHub/libs/
+cp libs/gson-*.jar $CARDGAMES_ANDROID/CardGames/libs/
+cp libs/jsr*.jar $CARDGAMES_ANDROID/CardGames/libs/
+cp libs/google-api-client-$LIB_VERSION.jar $CARDGAMES_ANDROID/CardGames/libs/
+cp libs/google-api-client-android-$LIB_VERSION.jar $CARDGAMES_ANDROID/CardGames/libs/
+cp libs/google-http-client-$LIB_VERSION.jar $CARDGAMES_ANDROID/CardGames/libs/
+cp libs/google-http-client-android-$LIB_VERSION.jar $CARDGAMES_ANDROID/CardGames/libs/
+cp libs/google-http-client-gson-$LIB_VERSION.jar $CARDGAMES_ANDROID/CardGames/libs/
+cp libs/google-oauth-client-$LIB_VERSION.jar $CARDGAMES_ANDROID/CardGames/libs/
 
 # Get the java files out of the generated Jar
-mv *.jar car-hub-carhub.zip
-unzip car-hub-carhub.zip
+mv *.jar worthwhile-games-cardgames.zip
+unzip worthwhile-games-cardgames.zip
 
-cp -R com/appspot/* $CARHUB_MOBILE/CarHub/src/main/java/com/appspot/
+cp -R com/appspot/* $CARDGAMES_ANDROID/CardGames/src/main/java/com/appspot/
 
-popd # carhub
+popd # cardgames
 popd # /tmp/
 
 # Clean up after ourselves
-rm /tmp/CarHubApi.zip
-rm -rf /tmp/carhub
-
-# Generate for iOS
-if [ -d $CARHUB_IOS ]; then
-    endpointscfg.py gen_discovery_doc -o . -f rpc api.CarHubApi
-
-    svn checkout \
-        http://google-api-objectivec-client.googlecode.com/svn/trunk/ \
-        google-api-objectivec-client-read-only
-
-    pushd google-api-objectivec-client-read-only/Source/Tools/ServiceGenerator/
-    xcodebuild -project ServiceGenerator.xcodeproj
-    popd
-    ./google-api-objectivec-client-read-only/Source/Tools/ServiceGenerator/build/Release/ServiceGenerator \
-        carhub-v1.discovery --outputDir $CARHUB_IOS/CarHubApi/
-
-    rm -rf google-api-objectivec-client-read-only
-fi
+rm /tmp/CardGamesApi.zip
+rm -rf /tmp/cardgames

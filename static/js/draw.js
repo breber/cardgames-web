@@ -57,6 +57,7 @@ wwg.cardgames.draw.drawBackground = function(canvas) {
 };
 
 wwg.cardgames.draw.drawMainMenu = function(canvas) {
+    wwg.cardgames.util.breadcrumb('menu');
     wwg.cardgames.util.log("wwg.cardgames.draw.drawMainMenu");
 
     wwg.cardgames.draw.drawBackground(canvas);
@@ -116,6 +117,7 @@ wwg.cardgames.draw.drawMainMenu = function(canvas) {
 };
 
 wwg.cardgames.draw.drawRules = function(canvas) {
+    wwg.cardgames.util.breadcrumb('rules');
     wwg.cardgames.util.log("wwg.cardgames.draw.drawRules");
 
     // TODO: add back button
@@ -163,7 +165,8 @@ wwg.cardgames.draw.drawRules = function(canvas) {
 };
 
 wwg.cardgames.draw.drawGameboard = function(canvas, gamestate) {
-    wwg.cardgames.util.log("wwg.cardgames.draw.updateUi");
+    wwg.cardgames.util.breadcrumb('gameboard');
+    wwg.cardgames.util.log("wwg.cardgames.draw.drawGameboard");
     var ctx = canvas.getContext('2d');
 
     wwg.cardgames.draw.drawBackground(canvas);

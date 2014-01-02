@@ -24,17 +24,7 @@ wwg.cardgames.init = function(apiRoot) {
 wwg.cardgames.loadPage = function() {
     wwg.cardgames.util.log("wwg.cardgames.loadPage");
     wwg.cardgames.listAllGames();
-    wwg.cardgames.enableButtons();
 }
-
-wwg.cardgames.enableButtons = function() {
-    wwg.cardgames.util.log("wwg.cardgames.enableButtons");
-
-    // TODO: add an on click handler for the create game button
-    // document.getElementById('create-game').onclick = function() {
-    //     wwg.cardgames.createGame();
-    // }
-};
 
 wwg.cardgames.createGame = function() {
     wwg.cardgames.util.log("wwg.cardgames.createGame");
@@ -50,12 +40,14 @@ wwg.cardgames.listAllGames = function() {
     gapi.client.cardgames.game.list.all().execute(function(resp) {
         if (!resp.code) {
             console.log(resp);
-            for (var i = 0; i < resp.items.length; i++) {
-                // TODO: implement
-                // var item = resp.items[i];
-                // var element = document.createElement('div');
-                // element.innerHTML = item.server_id + " --> " + " (" + item.lastmodified + ")";
-                // document.getElementById('content').appendChild(element);
+            if (resp.items !== undefined) {
+                for (var i = 0; i < resp.items.length; i++) {
+                    // TODO: implement
+                    // var item = resp.items[i];
+                    // var element = document.createElement('div');
+                    // element.innerHTML = item.server_id + " --> " + " (" + item.lastmodified + ")";
+                    // document.getElementById('content').appendChild(element);
+                }
             }
         }
     });
