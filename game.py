@@ -37,3 +37,15 @@ class Game(EndpointsModel):
     def start(self):
         # Nothing to do at this level
         pass
+	
+	def get_player(self, index):
+		if index == 0:
+			return player1
+		elif index == 1:
+			return player2
+		elif index == 2:
+			return player3
+		elif index == 3:
+			return player4
+		else:
+			return None
