@@ -1,5 +1,6 @@
 from datetime import datetime
 from google.appengine.ext import ndb
+from google.appengine.ext.ndb import polymodel
 from endpoints_proto_datastore.ndb import EndpointsModel, EndpointsAliasProperty
 from protorpc import remote, messages
 
@@ -12,10 +13,11 @@ class GameState:
     STATE_STARTED = 1
     STATE_COMPLETED = 2
 
-class Game(EndpointsModel):
-    # TODO: restrict the players sent to only the ones necessary
-    _message_fields_schema = ('server_id', 'game_type', 'state', 'deck', 'player1', 'player2', 'player3', 'player4', 'current_user', 'lastmodified')
+class Game(EndpointsModel, polymodel.PolyModel):
 
+    # TODO: restrict the players sent to only the ones necessary
+    _message_fields_schema = ('id', 'server_id', 'game_type', 'state', 'deck', 'player1', 'player2', 'player3', 'player4', 'current_user', 'lastmodified')
+    
     game_type = ndb.StringProperty()
     state = ndb.IntegerProperty(default=GameState.STATE_CREATED)
     deck = ndb.StructuredProperty(card.Card, repeated=True)
@@ -31,7 +33,9 @@ class Game(EndpointsModel):
 
     @EndpointsAliasProperty(property_type=messages.StringField)
     def server_id(self):
-        return str(self.key.id())
+        return str(self.key.string_id())
+
+        
 
 
     def start(self):
@@ -49,3 +53,30 @@ class Game(EndpointsModel):
 			return player4
 		else:
 			return None
+            
+    # ENDPOINTS STUFF
+    from endpoints_polymodel import _PolyModelQueryInfo, _DowncastMessage
+    def __init__(self, *args, **kwargs):
+        from endpoints_polymodel import _PolyModelQueryInfo
+        # Don't need to call both constructors since PolyModel doesn't define one
+        # and descends from model.Model, a superclass of EndpointsModel
+        super(Game, self).__init__(*args, **kwargs)
+        self._endpoints_query_info = _PolyModelQueryInfo(self)
+        
+    @classmethod
+    def ToMessageCollection(cls, items, collection_fields=None,
+                            next_cursor=None):
+        proto_model = cls.ProtoCollection(collection_fields=collection_fields)
+
+        items_as_message = [item.ToMessage(fields=collection_fields)
+                            for item in items]
+        final_proto_class = cls.ProtoModel(fields=collection_fields)
+        items_as_message = [_DowncastMessage(item, final_proto_class)
+                            for item in items_as_message]
+
+        result = proto_model(items=items_as_message)
+
+        if next_cursor is not None:
+            result.nextPageToken = next_cursor.to_websafe_string()
+
+        return result

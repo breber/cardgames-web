@@ -1,6 +1,7 @@
 from constants import *
 from game import *
 from protorpc import remote
+from crazyeightsgame import *
 import datetime
 import endpoints
 import logging
@@ -16,15 +17,18 @@ class CardGamesApi(remote.Service):
     def GameListAll(self, query):
         return query.filter(Game.state == GameState.STATE_CREATED)
 
-    @Game.method(path='game/add',
-                 http_method='POST',
-                 name='game.add')
-    def GameAdd(self, game):
+    @CrazyEightsGame.method(path='game/add/c8',
+                            http_method='POST',
+                            name='game.add.c8')
+    def GameAddC8(self, game):
+        # Use the GameAddHelper
+        game = self.GameAddHelper(game, GameType.TYPE_CRAZYEIGHTS)
+        return game
+        
+    # Helper method to add a game with its basic features.
+    def GameAddHelper(self, game, game_type):
         from deck import Deck
-        # TODO: type configurable
-        game_type = GameType.TYPE_CRAZYEIGHTS
-
-        # Set up the basic game model and store it
+        # Set up the basic game model
         game.game_type = GameType.get_name(game_type)
         game.deck = Deck.get_deck(game_type)
         game.lastmodified = datetime.datetime.now()
@@ -38,14 +42,21 @@ class CardGamesApi(remote.Service):
     def GameJoin(self, game):
         pass
 
-    @Game.method(path='game/start/{id}',
-                 http_method='POST',
-                 name='game.start',
-                 request_fields=('id',))
-    def GameStart(self, game):
+    @CrazyEightsGame.method(request_fields=('id',),
+                            path='game/start/c8/{id}',
+                            http_method='GET',
+                            name='game.start.c8')
+    def GameStartC8(self, game):
         if not game.from_datastore:
             raise endpoints.NotFoundException('game not found.')
 
+        logging.info('found it')
+        game = self.GameStartHelper(game)
+        logging.info('started it')
+        
+        game.put()
+        
+    def GameStartHelper(self, game):
         # If the game state isn't created, then we shouldn't be calling this method
         if game.state != GameState.STATE_CREATED:
             raise endpoints.BadRequestException('game already started')
@@ -55,7 +66,6 @@ class CardGamesApi(remote.Service):
 
         # Mark the game as started
         game.state = GameState.STATE_STARTED
-        game.put()
 
         # TODO: send notification to all users
 
